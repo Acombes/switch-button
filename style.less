@@ -1,0 +1,119 @@
+@circleDim: 75px;
+@containerBorderWidth: 2px;
+@circleBorderWidth: @containerBorderWidth + 1px;
+
+// Colors for the container
+@uncheckedContainerBorderColor: #ccc;
+@checkedContainerBorderColor: @checkedBgColor;
+@uncheckedBgColor: transparent;
+@checkedBgColor: lightgreen;
+
+// Colors for the circle
+@uncheckedCircleBgColor: #fff;
+@checkedCircleBgColor: #fff;
+@uncheckedCircleBorderColor: #ccc;
+@checkedCircleBorderColor: lightgreen;
+
+// Animation caracteritics
+@transitionDuration: .15s;
+@transitionEasing: ease-in-out;
+
+/* Essential Style */
+.switch-button {
+  display: block;
+  width: 2 * (@circleDim + @containerBorderWidth);
+  height: @circleDim + 2 * @containerBorderWidth;
+  border-radius: @circleDim;
+  box-sizing: content-box;
+  cursor: pointer;
+
+  margin: 200px auto 0;
+//  transform: scale(10);
+
+  input {
+    position: absolute;
+    left: -9001px;
+
+    &:checked + .container {
+      background: @checkedBgColor;
+      border-color: @checkedContainerBorderColor;
+
+      -webkit-transition: border-color @transitionDuration @transitionEasing, background .01s @transitionDuration;
+      -moz-transition: border-color @transitionDuration @transitionEasing, background .01s @transitionDuration;
+      -o-transition: border-color @transitionDuration @transitionEasing, background .01s @transitionDuration;
+      transition: border-color @transitionDuration @transitionEasing, background .01s @transitionDuration;
+
+      &:before {
+        right: 0;
+      }
+
+      .circle {
+        margin-left: 50%;
+        background: @checkedCircleBgColor;
+        border-color: @checkedCircleBorderColor;
+      }
+    }
+  }
+
+  .container {
+    display: block;
+    width: 2 * @circleDim;
+    height: @circleDim;
+    position: relative;
+    background: @uncheckedBgColor;
+    border: @containerBorderWidth solid @uncheckedContainerBorderColor;
+    border-radius: @circleDim;
+    -webkit-transition: border-color @transitionDuration @transitionEasing;
+    -moz-transition: border-color @transitionDuration @transitionEasing;
+    -o-transition: border-color @transitionDuration @transitionEasing;
+    transition: border-color @transitionDuration @transitionEasing;
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 50%;
+      left: 0;
+      bottom: 0;
+      z-index: 0;
+      background: @checkedBgColor;
+      border-radius: @circleDim;
+
+      -webkit-transition: right @transitionDuration @transitionEasing;
+      -moz-transition: right @transitionDuration @transitionEasing;
+      -o-transition: right @transitionDuration @transitionEasing;
+      transition: right @transitionDuration @transitionEasing;
+    }
+
+    .circle {
+      display: block;
+      width: 50%;
+      height: 100%;
+      position: relative;
+      top: -@containerBorderWidth;
+      left: -@containerBorderWidth;
+      z-index: 10;
+      background: @uncheckedCircleBgColor;
+      border: @circleBorderWidth solid @uncheckedCircleBorderColor;
+      border-radius: 100%;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+      box-sizing: content-box;
+
+      -webkit-transition: margin @transitionDuration @transitionEasing, border-color @transitionDuration @transitionEasing, background @transitionDuration @transitionEasing;
+      -moz-transition: margin @transitionDuration @transitionEasing, border-color @transitionDuration @transitionEasing, background @transitionDuration @transitionEasing;
+      -o-transition: margin @transitionDuration @transitionEasing, border-color @transitionDuration @transitionEasing, background @transitionDuration @transitionEasing;
+      transition: margin @transitionDuration @transitionEasing, border-color @transitionDuration @transitionEasing, background @transitionDuration @transitionEasing;
+    }
+  }
+}
+
+/* Secondary style */
+
+body {
+  box-sizing: border-box;
+}
+
+*, &:before, &:after {
+  box-sizing: inherit;
+}
